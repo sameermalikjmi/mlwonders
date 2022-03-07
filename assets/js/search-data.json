@@ -3,7 +3,7 @@
     
         "post0": {
             "title": "RL Introduction",
-            "content": ". from gym.envs.registration import register np.set_printoptions(precision=3) # Evaluate deterministic register( id=&#39;Deterministic-4x4-FrozenLake-v0&#39;, entry_point=&#39;gym.envs.toy_text.frozen_lake:FrozenLakeEnv&#39;, kwargs={&#39;map_name&#39;: &#39;4x4&#39;, &#39;is_slippery&#39;: False}) . def policy_evaluation(P, nS, nA, policy, gamma=0.9, tol=1e-8): &quot;&quot;&quot;Evaluate the value function from a given policy. Parameters: - P, nS, nA, gamma: defined at beginning of file policy: np.array[nS,nA] The policy to evaluate. Maps states to actions. tol: float Terminate policy evaluation when max |value_function(s) - prev_value_function(s)| &lt; tol Returns: - value_function: np.ndarray[nS] The value function of the given policy, where value_function[s] is the value of state s &quot;&quot;&quot; value_function= np.zeros(nS) while True: difference=0 for s in range(nS): sum = 0 for a, action_prob in enumerate(policy[s]): for probability, next_state, reward, terminal in P[s][a]: sum += action_prob * probability * (reward + gamma * value_function[next_state]) difference = max(difference, np.abs(value_function[s]-sum)) value_function[s] = sum if difference &lt; tol: break return value_function . env = gym.make(&quot;FrozenLake-v1&quot;) env = env.unwrapped random_policy2 = np.ones([env.nS, env.nA]) / env.nA policy_evaluation(env.P,env.nS,env.nA, random_policy2,tol=1e-8) . array([0.004, 0.004, 0.01 , 0.004, 0.007, 0. , 0.026, 0. , 0.019, 0.058, 0.107, 0. , 0. , 0.13 , 0.391, 0. ]) .",
+            "content": ". Reinforcement Learning . Reinforcement learning is learning what to do—how to map situations to actions—so as to maximize a numerical reward signal. The learner is not told which actions to take, but instead must discover which actions yield the most reward by trying them. In the most interesting and challenging cases, actions may affect not only the immediate reward but also the next situation and, through that, all subsequent rewards. These two characteristics—trial-and-error search and delayed reward—are the two most important distinguishing features of reinforcement learning. [^1]: Richard and Sutton. . from gym.envs.registration import register np.set_printoptions(precision=3) # Evaluate deterministic register( id=&#39;Deterministic-4x4-FrozenLake-v0&#39;, entry_point=&#39;gym.envs.toy_text.frozen_lake:FrozenLakeEnv&#39;, kwargs={&#39;map_name&#39;: &#39;4x4&#39;, &#39;is_slippery&#39;: False}) . def policy_evaluation(P, nS, nA, policy, gamma=0.9, tol=1e-8): &quot;&quot;&quot;Evaluate the value function from a given policy. Parameters: - P, nS, nA, gamma: defined at beginning of file policy: np.array[nS,nA] The policy to evaluate. Maps states to actions. tol: float Terminate policy evaluation when max |value_function(s) - prev_value_function(s)| &lt; tol Returns: - value_function: np.ndarray[nS] The value function of the given policy, where value_function[s] is the value of state s &quot;&quot;&quot; value_function= np.zeros(nS) while True: difference=0 for s in range(nS): sum = 0 for a, action_prob in enumerate(policy[s]): for probability, next_state, reward, terminal in P[s][a]: sum += action_prob * probability * (reward + gamma * value_function[next_state]) difference = max(difference, np.abs(value_function[s]-sum)) value_function[s] = sum if difference &lt; tol: break return value_function . env = gym.make(&quot;FrozenLake-v1&quot;) env = env.unwrapped random_policy2 = np.ones([env.nS, env.nA]) / env.nA policy_evaluation(env.P,env.nS,env.nA, random_policy2,tol=1e-8) . array([0.004, 0.004, 0.01 , 0.004, 0.007, 0. , 0.026, 0. , 0.019, 0.058, 0.107, 0. , 0. , 0.13 , 0.391, 0. ]) .",
             "url": "https://sameermalikjmi.github.io/mlwonders/rl/2022/03/07/rl.html",
             "relUrl": "/rl/2022/03/07/rl.html",
             "date": " • Mar 7, 2022"
@@ -11,23 +11,23 @@
         
     
   
-    
-        ,"post1": {
-            "title": "An Example Markdown Post",
-            "content": "Example Markdown Post . Basic setup . Jekyll requires blog post files to be named according to the following format: . YEAR-MONTH-DAY-filename.md . Where YEAR is a four-digit number, MONTH and DAY are both two-digit numbers, and filename is whatever file name you choose, to remind yourself what this post is about. .md is the file extension for markdown files. . The first line of the file should start with a single hash character, then a space, then your title. This is how you create a “level 1 heading” in markdown. Then you can create level 2, 3, etc headings as you wish but repeating the hash character, such as you see in the line ## File names above. . Basic formatting . You can use italics, bold, code font text, and create links. Here’s a footnote 1. Here’s a horizontal rule: . . Lists . Here’s a list: . item 1 | item 2 | . And a numbered list: . item 1 | item 2 | Boxes and stuff . This is a quotation . . You can include alert boxes …and… . . You can include info boxes Images . . Code . You can format text and code per usual . General preformatted text: . # Do a thing do_thing() . Python code and output: . # Prints &#39;2&#39; print(1+1) . 2 . Formatting text as shell commands: . echo &quot;hello world&quot; ./some_script.sh --option &quot;value&quot; wget https://example.com/cat_photo1.png . Formatting text as YAML: . key: value - another_key: &quot;another value&quot; . Tables . Column 1 Column 2 . A thing | Another thing | . Tweetcards . Altair 4.0 is released! https://t.co/PCyrIOTcvvTry it with: pip install -U altairThe full list of changes is at https://t.co/roXmzcsT58 ...read on for some highlights. pic.twitter.com/vWJ0ZveKbZ . &mdash; Jake VanderPlas (@jakevdp) December 11, 2019 Footnotes . This is the footnote. &#8617; . |",
-            "url": "https://sameermalikjmi.github.io/mlwonders/markdown/2020/01/14/test-markdown-post.html",
-            "relUrl": "/markdown/2020/01/14/test-markdown-post.html",
-            "date": " • Jan 14, 2020"
-        }
-        
-    
-  
 
   
   
+      ,"page0": {
+          "title": "An Example Markdown Post",
+          "content": "Example Markdown Post . Basic setup . Jekyll requires blog post files to be named according to the following format: . YEAR-MONTH-DAY-filename.md . Where YEAR is a four-digit number, MONTH and DAY are both two-digit numbers, and filename is whatever file name you choose, to remind yourself what this post is about. .md is the file extension for markdown files. . The first line of the file should start with a single hash character, then a space, then your title. This is how you create a “level 1 heading” in markdown. Then you can create level 2, 3, etc headings as you wish but repeating the hash character, such as you see in the line ## File names above. . Basic formatting . You can use italics, bold, code font text, and create links. Here’s a footnote 1. Here’s a horizontal rule: . . Lists . Here’s a list: . item 1 | item 2 | . And a numbered list: . item 1 | item 2 | Boxes and stuff . This is a quotation . . You can include alert boxes …and… . . You can include info boxes Images . . Code . You can format text and code per usual . General preformatted text: . # Do a thing do_thing() . Python code and output: . # Prints &#39;2&#39; print(1+1) . 2 . Formatting text as shell commands: . echo &quot;hello world&quot; ./some_script.sh --option &quot;value&quot; wget https://example.com/cat_photo1.png . Formatting text as YAML: . key: value - another_key: &quot;another value&quot; . Tables . Column 1 Column 2 . A thing | Another thing | . Tweetcards . Altair 4.0 is released! https://t.co/PCyrIOTcvvTry it with: pip install -U altairThe full list of changes is at https://t.co/roXmzcsT58 ...read on for some highlights. pic.twitter.com/vWJ0ZveKbZ . &mdash; Jake VanderPlas (@jakevdp) December 11, 2019 Footnotes . This is the footnote. &#8617; . |",
+          "url": "https://sameermalikjmi.github.io/mlwonders/2020-01-14-test-markdown-post.html",
+          "relUrl": "/2020-01-14-test-markdown-post.html",
+          "date": ""
+      }
+      
+  
 
   
-      ,"page1": {
+
+  
+      ,"page2": {
           "title": "About Me",
           "content": "Hi My name is Sameer Malik. I am currently doing my Masters in Robotics And Artificial Intelligence linkedIn .",
           "url": "https://sameermalikjmi.github.io/mlwonders/about/",
@@ -59,7 +59,7 @@
   
 
   
-      ,"page10": {
+      ,"page11": {
           "title": "",
           "content": "Sitemap: {{ “sitemap.xml” | absolute_url }} | .",
           "url": "https://sameermalikjmi.github.io/mlwonders/robots.txt",
