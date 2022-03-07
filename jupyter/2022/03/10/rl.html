@@ -8,8 +8,8 @@
 <meta name="generator" content="Jekyll v4.1.1" />
 <meta property="og:title" content="RL Introduction" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="RL Tutorials" />
-<meta property="og:description" content="RL Tutorials" />
+<meta name="description" content="RL Introduction based on MDP" />
+<meta property="og:description" content="RL Introduction based on MDP" />
 <link rel="canonical" href="https://sameermalikjmi.github.io/mlwonders/jupyter/2022/03/10/rl.html" />
 <meta property="og:url" content="https://sameermalikjmi.github.io/mlwonders/jupyter/2022/03/10/rl.html" />
 <meta property="og:site_name" content="fastpages" />
@@ -20,7 +20,7 @@
 <meta property="twitter:image" content="https://sameermalikjmi.github.io/mlwonders/images/chart-preview.png" />
 <meta property="twitter:title" content="RL Introduction" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-03-10T00:00:00-06:00","datePublished":"2022-03-10T00:00:00-06:00","description":"RL Tutorials","headline":"RL Introduction","image":"https://sameermalikjmi.github.io/mlwonders/images/chart-preview.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://sameermalikjmi.github.io/mlwonders/jupyter/2022/03/10/rl.html"},"url":"https://sameermalikjmi.github.io/mlwonders/jupyter/2022/03/10/rl.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-03-10T00:00:00-06:00","datePublished":"2022-03-10T00:00:00-06:00","description":"RL Introduction based on MDP","headline":"RL Introduction","image":"https://sameermalikjmi.github.io/mlwonders/images/chart-preview.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://sameermalikjmi.github.io/mlwonders/jupyter/2022/03/10/rl.html"},"url":"https://sameermalikjmi.github.io/mlwonders/jupyter/2022/03/10/rl.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/mlwonders/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://sameermalikjmi.github.io/mlwonders/feed.xml" title="fastpages" /><link rel="shortcut icon" type="image/x-icon" href="/mlwonders/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
@@ -75,7 +75,7 @@ window.onload = wrap_img;
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">RL Introduction</h1><p class="page-description">RL Tutorials</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-03-10T00:00:00-06:00" itemprop="datePublished">
+    <h1 class="post-title p-name" itemprop="name headline">RL Introduction</h1><p class="page-description">RL Introduction based on MDP</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-03-10T00:00:00-06:00" itemprop="datePublished">
         Mar 10, 2022
       </time>
        • <span class="read-time" title="Estimated read time">
@@ -135,14 +135,157 @@ window.onload = wrap_img;
 
 <div class="container" id="notebook-container">
         
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">import</span> <span class="nn">gym</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>HI there good to see u guys!!!</p>
+<p><code>![](my_icons/fastai_logo.png)</code></p>
 
 </div>
 </div>
 </div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">gym.envs.registration</span> <span class="kn">import</span> <span class="n">register</span>
+<span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="c1"># Evaluate deterministic</span>
+<span class="n">register</span><span class="p">(</span>
+    <span class="nb">id</span><span class="o">=</span><span class="s1">'Deterministic-4x4-FrozenLake-v0'</span><span class="p">,</span>
+    <span class="n">entry_point</span><span class="o">=</span><span class="s1">'gym.envs.toy_text.frozen_lake:FrozenLakeEnv'</span><span class="p">,</span>
+    <span class="n">kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">'map_name'</span><span class="p">:</span> <span class="s1">'4x4'</span><span class="p">,</span>
+            <span class="s1">'is_slippery'</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">policy_evaluation</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">nS</span><span class="p">,</span> <span class="n">nA</span><span class="p">,</span> <span class="n">policy</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">):</span>
+    <span class="sd">"""Evaluate the value function from a given policy.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    ----------</span>
+<span class="sd">    P, nS, nA, gamma:</span>
+<span class="sd">        defined at beginning of file</span>
+<span class="sd">    policy: np.array[nS,nA]</span>
+<span class="sd">        The policy to evaluate. Maps states to actions.</span>
+<span class="sd">    tol: float</span>
+<span class="sd">        Terminate policy evaluation when</span>
+<span class="sd">            max |value_function(s) - prev_value_function(s)| &lt; tol</span>
+<span class="sd">    Returns:</span>
+<span class="sd">    -------</span>
+<span class="sd">    value_function: np.ndarray[nS]</span>
+<span class="sd">        The value function of the given policy, where value_function[s] is</span>
+<span class="sd">        the value of state s</span>
+<span class="sd">    """</span>
+    
+    <span class="n">value_function</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nS</span><span class="p">)</span>
+    
+  
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+      
+        <span class="n">difference</span><span class="o">=</span><span class="mi">0</span>
+      
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nS</span><span class="p">):</span>
+            <span class="nb">sum</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">action_prob</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">policy</span><span class="p">[</span><span class="n">s</span><span class="p">]):</span>
+                
+                <span class="k">for</span> <span class="n">probability</span><span class="p">,</span> <span class="n">next_state</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">terminal</span> <span class="ow">in</span> <span class="n">P</span><span class="p">[</span><span class="n">s</span><span class="p">][</span><span class="n">a</span><span class="p">]:</span>
+                  
+                    <span class="nb">sum</span> <span class="o">+=</span> <span class="n">action_prob</span> <span class="o">*</span> <span class="n">probability</span> <span class="o">*</span> <span class="p">(</span><span class="n">reward</span> <span class="o">+</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">value_function</span><span class="p">[</span><span class="n">next_state</span><span class="p">])</span>
+
+           
+            <span class="n">difference</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">difference</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">value_function</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">-</span><span class="nb">sum</span><span class="p">))</span>
+
+            
+            <span class="n">value_function</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sum</span>
+
+       
+        <span class="k">if</span> <span class="n">difference</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">:</span>
+            <span class="k">break</span>
+
+    <span class="k">return</span> <span class="n">value_function</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">env</span> <span class="o">=</span> <span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s2">"FrozenLake-v1"</span><span class="p">)</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">unwrapped</span>
+<span class="n">random_policy2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="n">env</span><span class="o">.</span><span class="n">nS</span><span class="p">,</span> <span class="n">env</span><span class="o">.</span><span class="n">nA</span><span class="p">])</span> <span class="o">/</span> <span class="n">env</span><span class="o">.</span><span class="n">nA</span>
+<span class="n">policy_evaluation</span><span class="p">(</span><span class="n">env</span><span class="o">.</span><span class="n">P</span><span class="p">,</span><span class="n">env</span><span class="o">.</span><span class="n">nS</span><span class="p">,</span><span class="n">env</span><span class="o">.</span><span class="n">nA</span><span class="p">,</span> <span class="n">random_policy2</span><span class="p">,</span><span class="n">tol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([0.004, 0.004, 0.01 , 0.004, 0.007, 0.   , 0.026, 0.   , 0.019,
+       0.058, 0.107, 0.   , 0.   , 0.13 , 0.391, 0.   ])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
 </div>
 
 
